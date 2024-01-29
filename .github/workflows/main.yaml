@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: '3.1.x'
       - name: build
-        working-directory: ./Tailspin.SpaceGame.Web
+        working-directory: .\Tailspin.SpaceGame.Web
         run: |
           dotnet restore
           dotnet build --configuration Release --no-restore
