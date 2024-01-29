@@ -48,5 +48,7 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"github-personal-org_java" /o:"github-personal-org" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build ./Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
+          dotnet restore./Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
+          dotnet build --configuration Release --no-restore ./Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
+          dotnet publish --configuration Release --no-build ./Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
