@@ -10,8 +10,12 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     steps:
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '3.1.x'
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
@@ -44,5 +48,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"github-personal-org_java" /o:"github-personal-org" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
+          dotnet build ./Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
